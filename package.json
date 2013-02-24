@@ -1,5 +1,5 @@
 {
-  "name": "OpenShift-Sample-App",
+  "name": "Facebook Multi group post",
   "version": "1.0.0",
   "description": "OpenShift Sample Application",
   "keywords": [
@@ -9,9 +9,9 @@
     "openshift"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
-    "url":  "http://openshift.redhat.com/"
+    "name": "Lucas Holmquist",
+    "email": "lucas.holmquist@gmail.com",
+    "url":  "http://lholmquist.org/"
   },
   "homepage": "http://openshift.redhat.com/",
   "repository": {
