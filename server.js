@@ -30,7 +30,7 @@ var SampleApp = function() {
             //  allows us to run/test the app locally.
             console.warn('No OPENSHIFT_INTERNAL_IP var, using 127.0.0.1');
             self.ipaddress = "127.0.0.1";
-        };
+        }
     };
 
 
@@ -39,11 +39,12 @@ var SampleApp = function() {
      */
     self.populateCache = function() {
         if (typeof self.zcache === "undefined") {
-            self.zcache = { 'index.html': '' };
+            self.zcache = { 'index.html': '', 'channel.html':'' };
         }
 
         //  Local cache for static content.
         self.zcache['index.html'] = fs.readFileSync('./index.html');
+        self.zcache['channel.html'] = fs.readFileSync('./channel.html');
     };
 
 
@@ -105,10 +106,23 @@ var SampleApp = function() {
             res.send("<html><body><img src='" + link + "'></body></html>");
         };
 
+        self.routes['/css/*'] = function(req, res) {
+            res.send( fs.readFileSync("." + req.path ), { "Content-Type": "text/css" } );
+        };
+
+        self.routes['/js/*'] = function(req, res) {
+            res.send( fs.readFileSync("." + req.path ) );
+        };
+
         self.routes['/'] = function(req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('index.html') );
         };
+
+        /*self.routes['/channel.html'] = function(req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.send(self.cache_get('channel.html') );
+        };*/
     };
 
 
@@ -154,11 +168,11 @@ var SampleApp = function() {
 };   /*  Sample Application.  */
 
 
-
 /**
  *  main():  Main code.
  */
 var zapp = new SampleApp();
 zapp.initialize();
 zapp.start();
+
 
